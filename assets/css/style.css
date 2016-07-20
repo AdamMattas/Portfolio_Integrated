@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 p{
 	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
 	color: #777777;
@@ -8,9 +13,11 @@ p{
 }
 
 a{
+	position: relative;
 	text-decoration: none;
 	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
 }
+
 a:hover{
 	text-decoration: none;
 }
@@ -73,20 +80,43 @@ a:hover{
 
 .image-wrapper{
 	position: relative;
+	margin-bottom: 30px;
+	line-height: 0;
 }
 
 .image-portfolio{
 	height: 197px;
 	width: 251px;
-	margin-bottom: 30px;
+	border: 1px solid #000000;
+	border-bottom: none;
+	vertical-align: baseline;
+}
+
+.port-detail-bold{
+	font-weight: bold;
 }
 
 .label{
-	position: absolute;
-	top: 0;
-	left: 0;
+	width: 251px;
 	font-size: 100%;
 	border: 1px solid #000000;
+	display: block;
+}
+
+.label-top{
+	width: auto;
+	position: absolute;
+	top: -183px;
+	right: 0;
+	display: inline;
+	background-color: #ffffff;
+	color: #000000;
+	border-top: none;
+	border-right: none;
+}
+
+footer{
+	margin: 0px;
 }
 
 .footer{

@@ -1,0 +1,99 @@
+p{
+	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+	color: #777777;
+	margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+a{
+	text-decoration: none;
+	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+}
+a:hover{
+	text-decoration: none;
+}
+
+.width-100{
+	width: 100%;
+	position: relative;
+}
+
+.overline{
+	border-top: 1px solid #000000;
+}
+
+.row-top{
+	margin-top: 30px;
+}
+
+.row-top-15{
+	margin-top: 15px;
+}
+
+.no-top-margin{
+	margin-top: 0px;
+}
+
+.no-bottom-margin{
+	margin-bottom: 0px;
+}
+
+.bio-pic{
+	float: left;
+	width: 260px;
+	margin: 15px 15px 0px 0px;
+}
+
+.p-link{
+	color: #003265;
+}
+
+.p-link:hover{
+	text-decoration: underline;
+	font-style: italic;
+	color: #003265;
+}
+
+.icon-social{
+	width: 66px;
+	height: 66px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+.float-left{
+	float: left;
+}
+
+.margin-left-social{
+	margin-left: 15px;
+}
+
+.image-wrapper{
+	position: relative;
+}
+
+.image-portfolio{
+	height: 197px;
+	width: 251px;
+	margin-bottom: 30px;
+}
+
+.label{
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 100%;
+	border: 1px solid #000000;
+}
+
+.footer{
+	height: 100px;
+	text-align: center;
+	color: #ffffff;
+	padding-top: 33px;
+	background-color: #222222;
+	border-top: 8px solid #2780e3;
+}

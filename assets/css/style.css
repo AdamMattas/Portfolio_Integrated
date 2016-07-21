@@ -39,6 +39,10 @@ a:hover{
 	margin-top: 15px;
 }
 
+.row-top-10{
+	margin-top: 10px;
+}
+
 .no-top-margin{
 	margin-top: 0px;
 }
@@ -85,10 +89,9 @@ a:hover{
 }
 
 .image-portfolio{
-	height: 197px;
-	width: 251px;
+	height: 198px;
+	width: 392px;
 	border: 1px solid #000000;
-	border-bottom: none;
 	vertical-align: baseline;
 }
 
@@ -96,23 +99,33 @@ a:hover{
 	font-weight: bold;
 }
 
+.side-image{
+	width: 230px;
+	height: 116px;
+	margin-top: 15px;
+	border: 1px solid #000000;
+}
+
 .label{
-	width: 251px;
+	width: 392px;
 	font-size: 100%;
 	border: 1px solid #000000;
+	padding: 15px;
+	border-top: none;
 	display: block;
 }
 
 .label-top{
 	width: auto;
 	position: absolute;
-	top: -183px;
+	top: -184px;
 	right: 0;
 	display: inline;
 	background-color: #ffffff;
 	color: #000000;
 	border-top: none;
 	border-right: none;
+	display: none;
 }
 
 footer{

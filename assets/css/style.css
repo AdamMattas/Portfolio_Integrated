@@ -102,8 +102,14 @@ a:hover{
 .side-image{
 	width: 230px;
 	height: 116px;
-	margin-top: 15px;
+	margin-top: 5px;
 	border: 1px solid #000000;
+}
+
+.side-button{
+	width: 230px;	
+	border: 1px solid #000000;
+	border-radius: 5px;
 }
 
 .label{

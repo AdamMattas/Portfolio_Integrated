@@ -95,6 +95,16 @@ a:hover{
 	vertical-align: baseline;
 }
 
+.rutgers{
+	position: absolute;
+	background-image: url("../images/rutgers_logo_small.png");
+	width: 35px;
+	height: 41px;
+	bottom: 10px;
+	left: 10px;
+	opacity: 0;
+}
+
 .port-detail-bold{
 	font-weight: bold;
 }

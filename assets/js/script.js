@@ -73,9 +73,21 @@ mta = {
 
 $(document).on("ready", function(){
 
-  $('.image-wrapper').on('mouseenter', function(){
+  $('#panel-container').on('mouseenter', function(){
 
-    $('.rutgers').animate({ 'opacity': 100 }, 10000);
+    $('.cover1').animate({ 'left': '-1000px', 'opacity': "0" }, 1000);
+    $('.cover2').animate({ 'right': '-1500px', 'opacity': "0" }, 1000);
+    $('.cover3').delay( 300 ).animate({ 'left': '-1000px', 'opacity': "0" }, 1000);
+    $('.cover4').delay( 300 ).animate({ 'right': '-1500px', 'opacity': "0" }, 1000);
+    $('.cover5').delay( 600 ).animate({ 'left': '-1000px', 'opacity': "0" }, 1000);
+    $('.cover6').delay( 600 ).animate({ 'right': '-1500px', 'opacity': "0" }, 1000);
+    $('.cover7').delay( 900 ).animate({ 'left': '-1000px', 'opacity': "0" }, 1000);
+    $('.cover8').delay( 900 ).animate({ 'right': '-1500px', 'opacity': "0" }, 1000);
+    $('.rutgers').animate({ 'opacity': 100 }, 30000);
+
+  });
+
+  $('.image-wrapper').on('mouseenter', function(){
     
     var name = $(this).data('name');
     var objName = eval(name);

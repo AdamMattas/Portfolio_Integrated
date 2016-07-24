@@ -22,6 +22,10 @@ a:hover{
 	text-decoration: none;
 }
 
+.hide{
+	display: none;
+}
+
 .width-100{
 	width: 100%;
 	position: relative;
@@ -55,6 +59,7 @@ a:hover{
 	float: left;
 	width: 260px;
 	margin: 15px 15px 0px 0px;
+	border: 1px solid #000000;
 }
 
 .p-link{
@@ -70,6 +75,7 @@ a:hover{
 .icon-social{
 	width: 66px;
 	height: 66px;
+	border: 1px solid #000000;
 	margin-top: 15px;
 	margin-bottom: 10px;
 }
@@ -82,10 +88,37 @@ a:hover{
 	margin-left: 15px;
 }
 
+.panel-primary{
+	border-color: #042240;
+}
+
+.panel-primary > .panel-heading{
+	background-color: #055c98;
+	border-color: #042240;
+}
+
+.btn-primary{
+	background-color: #055c98;
+	border-color: #042240;
+}
+
+.full-page-wrap{
+	overflow: hidden;
+}
+
 .image-wrapper{
 	position: relative;
 	margin-bottom: 30px;
 	line-height: 0;
+}
+
+.image-cover{
+	position: absolute;
+	height: 244px;
+	width: 392px;
+	border: 1px solid #000000;
+	vertical-align: baseline;
+	z-index: 102;
 }
 
 .image-portfolio{
@@ -103,6 +136,7 @@ a:hover{
 	bottom: 10px;
 	left: 10px;
 	opacity: 0;
+	z-index: 101;
 }
 
 .port-detail-bold{
@@ -129,6 +163,8 @@ a:hover{
 	padding: 15px;
 	border-top: none;
 	display: block;
+	position: relative;
+	z-index: 100;
 }
 
 .label-top{
@@ -154,5 +190,5 @@ footer{
 	color: #ffffff;
 	padding-top: 33px;
 	background-color: #222222;
-	border-top: 8px solid #2780e3;
+	border-top: 8px solid #055c98;
 }

@@ -73,7 +73,7 @@ mta = {
 
 $(document).on("ready", function(){
 
-  $('#panel-container').on('mouseenter', function(){
+  $('#panel-portfolio').on('mouseenter', function(){
 
     $('.cover1').animate({ 'left': '-1000px', 'opacity': "0" }, 1000);
     $('.cover2').animate({ 'right': '-1500px', 'opacity': "0" }, 1000);

@@ -31,6 +31,17 @@ a:hover{
 	position: relative;
 }
 
+/*.container-cover{
+	position: absolute;
+	height: 80%;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	left: 0;
+	right: 0;
+	background-color: #055c98;
+	z-index: 2000;
+}*/
+
 .overline{
 	border-top: 1px solid #000000;
 }
@@ -56,12 +67,11 @@ a:hover{
 }
 
 .margin-top-eight{
-	margin-top: 8px;
+	margin-top: 12px;
 }
 
 .squares-top{
 	position: absolute;
-	/*top: 9px;*/
 	background-image: url("../images/squares2.png");
 	width: 143px;
 	height: 53px;
@@ -224,7 +234,7 @@ footer{
 .footer-bottom{
 	position: absolute;
 	bottom: 0;
-	height: 60px;
+	height: 62px;
 	width: 100%;
 	text-align: center;
 	color: #ffffff;

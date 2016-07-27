@@ -31,17 +31,6 @@ a:hover{
 	position: relative;
 }
 
-/*.container-cover{
-	position: absolute;
-	height: 80%;
-	margin-top: 25px;
-	margin-bottom: 25px;
-	left: 0;
-	right: 0;
-	background-color: #055c98;
-	z-index: 2000;
-}*/
-
 .overline{
 	border-top: 1px solid #000000;
 }
@@ -68,6 +57,10 @@ a:hover{
 
 .margin-top-eight{
 	margin-top: 12px;
+}
+
+.margin-bottom{
+	margin-bottom: 10px;
 }
 
 .squares-top{
@@ -117,6 +110,13 @@ a:hover{
 
 .margin-left-social{
 	margin-left: 15px;
+}
+
+.api-button{
+	width: 228px;
+	height: 79px;
+	margin-top: 15px;
+	border: 1px solid #000000;
 }
 
 .panel-primary{

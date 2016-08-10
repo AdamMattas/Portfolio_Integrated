@@ -213,8 +213,35 @@ a:hover{
 	z-index: 101;
 }
 
+.adam-icon{
+	position: absolute;
+	background-image: url("../images/adam-icon.png");
+	width: 57px;
+	height: 41px;
+	bottom: 10px;
+	left: 10px;
+	opacity: 0;
+	z-index: 101;
+}
+
+.category-icon{
+	float: left;
+	margin-right: 10px;
+	width: 34px;
+}
+
+.category-icon-adam{
+	float: left;
+	margin-right: 10px;
+	width: 39px;
+}
+
 .port-detail-bold{
 	font-weight: bold;
+}
+
+.clear-both{
+	clear: both;
 }
 
 .side-image{

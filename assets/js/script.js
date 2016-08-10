@@ -84,6 +84,7 @@ $(document).on("ready", function(){
     $('.cover7').delay( 900 ).animate({ 'left': '-1000px', 'opacity': "0" }, 1000);
     $('.cover8').delay( 900 ).animate({ 'right': '-1500px', 'opacity': "0" }, 1000);
     $('.rutgers').animate({ 'opacity': 100 }, 30000);
+    $('.adam-icon').animate({ 'opacity': 100 }, 30000);
 
   });
 

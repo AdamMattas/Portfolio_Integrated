@@ -87,6 +87,13 @@ $(document).on("ready", function(){
 
   });
 
+  $('.panel').on('mouseenter', function(){
+
+    $('.bio-pic1').addClass('bio-pic-front');
+    $('.bio-pic2').addClass('bio-pic-back');
+
+  });
+
   $('.image-wrapper').on('mouseenter', function(){
     
     var name = $(this).data('name');

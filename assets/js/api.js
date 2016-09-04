@@ -1,19 +1,19 @@
 var spotify = {
-    title: "Search Spotify",
+    title: "Spotify Music",
     image: "assets/images/spotify.png",
     placeholder: "Search Artist Name",
     id: "spotify-input",
     searchClass: "spotify-search"
 },
 nyt = {
-    title: "Search New York Times",
+    title: "The New York Times",
     image: "assets/images/nytimes.jpg",
     placeholder: "Search Articles",
     id: "nyt-input",
     searchClass: "nyt-search"
 },
 omdb = {
-    title: "Search Movie Titles",
+    title: "OMDb Movies",
     image: "assets/images/omdb.jpg",
     placeholder: "Search Movie Title",
     id: "omdb-input",
@@ -48,7 +48,7 @@ $(document).on('ready', function(){
 
         playDiv.append(player);
 
-        $("#main-panel").prepend(playDiv);
+        $("#main-api-panel").prepend(playDiv);
 
     }
 
@@ -76,6 +76,7 @@ $(document).on('ready', function(){
                 buildArtistArea(trackResponse);
 
                 var tracksContainer = $('<div>');
+                tracksContainer.attr('id', 'main-api-panel');
                 tracksContainer.addClass('col-md-12');
 
                 var results = trackResponse.tracks;
@@ -100,18 +101,20 @@ $(document).on('ready', function(){
 
                 }
 
-                $("#main-panel").empty();
-
-                spotifyPlayer(trackResponse.tracks[0].id);
+                $("#main-hidable").hide();
 
                 // Appends the new player into the HTML
-                $("#main-panel").append(tracksContainer)
+                $("#main-panel").append(tracksContainer);
+
+                spotifyPlayer(trackResponse.tracks[0].id);
             })
         });     
     }
 
+    // Send a new track to the Spotify player when image is clicked
     $(document).on('click', '.track-img', function(){
 
+        // Track ID is stored in the image's data-id
         var trackSend = $(this).data('id'); 
 
         spotifyPlayer(trackSend);
@@ -136,9 +139,12 @@ $(document).on('ready', function(){
         var name = $(this).data('name');
         var apiName = eval(name);
 
-        var sideTitle = $('<h4>'); //creates a new h4 element
+        var sideDiv = $('<div>');
+        sideDiv.attr('id', 'api-search');
+
+        var sideTitle = $('<h3>'); //creates a new h3 element
         sideTitle.text(apiName.title); //adds text from object
-        sideTitle.addClass('port-detail-bold'); //added class to image
+        sideTitle.addClass('api-title'); //added class to image
 
         var sideImage = $('<img>'); //creates a new image element
         sideImage.attr('src', apiName.image); //added src attribute from object
@@ -155,11 +161,28 @@ $(document).on('ready', function(){
         sideLink.text('Submit'); //adds text from object
         sideLink.addClass('btn btn-primary api-search-button'); //added class to image
 
-        $('.api-listener').empty();
-        $('#api-listen').prepend(sideLink);//prepends dynamic element to listen div
-        $('#api-listen').prepend(sideText);//prepends dynamic element to listen div
-        $('#api-listen').prepend(sideImage);//prepends dynamic element to listen div
-        $('#api-listen').prepend(sideTitle);//prepends dynamic element to listen div
+        var sideClose = $('<button>'); //creates a new p element
+        sideClose.text('Go Back'); //adds text from object
+        sideClose.addClass('btn btn-danger api-restore'); //added class to image
+
+        (sideDiv).append(sideTitle);//appends dynamic element to sideDiv
+        (sideDiv).append(sideImage);//appends dynamic element to sideDiv
+        (sideDiv).append(sideText);//appends dynamic element to sideDiv
+        (sideDiv).append(sideLink);//appends dynamic element to sideDiv
+        (sideDiv).append(sideClose);//appends dynamic element to sideDiv
+
+        $('#api-hidable').hide();
+
+        $('#api-listen').prepend(sideDiv);//prepends dynamic element to listen div
+
+    });
+
+    $(document).on('click', '.api-restore', function(){
+
+        $('#api-search').hide();
+        $('#api-hidable').show();
+        $('#main-api-panel').hide();
+        $("#main-hidable").show();
 
     });
 

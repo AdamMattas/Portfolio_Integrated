@@ -145,13 +145,6 @@ a:hover{
 	margin-right: 15px;
 }
 
-.api-button{
-	width: 228px;
-	height: 79px;
-	margin-top: 15px;
-	border: 1px solid #000000;
-}
-
 .container-cover{
 	position: absolute;
 	top: 0;
@@ -237,6 +230,12 @@ a:hover{
 }
 
 .port-detail-bold{
+	padding-top: 11px;
+	font-weight: bold;
+}
+
+.port-detail-bold2{
+	padding-top: 10px;
 	font-weight: bold;
 }
 
@@ -284,6 +283,38 @@ a:hover{
 .navbar-default{
 	height: 62px;
 	border-bottom: 8px solid #055c98;
+}
+
+.api-button{
+	width: 230px;
+	height: 79px;
+	margin-top: 15px;
+	border: 1px solid #000000;
+}
+
+.api-input{
+	margin-top: 15px;
+	border: 1px solid #000000;
+}
+
+.api-search-button{
+	margin-top: 15px;
+	width: 230px;
+	background-color: #222222;
+	border: 1px solid #000000;
+	border-radius: 5px;
+}
+
+.api-search-button:hover{
+	background-color: #ffffff;
+	color: #000000;
+	border: 1px solid #000000;
+	border-radius: 5px;
+}
+
+.spot-player{
+	margin-top: 15px;
+	width: 100%;
 }
 
 footer{

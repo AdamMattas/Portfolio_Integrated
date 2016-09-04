@@ -68,7 +68,7 @@
                 <h3 class="panel-title">About Me</h3>
               </div>
               <div class="panel-body">
-                <div class="width-100 overline">
+                <div id="main-panel" class="width-100 overline">
                   <div class="flip3D">
                     <img class="bio-pic2" src="assets/images/adam2.jpg" alt="Profile picture" />
                     <img class="bio-pic1" src="assets/images/adam3.jpg" alt="Profile picture" />
@@ -81,6 +81,7 @@
                     <p>To further my education I am currently a student in the Rutgers full-stack web development program and will be graduating October 2016. Throughout the course I have been developing creative and skillful projects in a collaborative environment. Utilizing source control and communicating with my team through Slack has been an excellent way to maintain workflow and fulfill deadline requirements. This challenging program has allowed me to become skilled with HTML5, CSS3, Bootstrap, JavaScript, jQuery, Node JS, APIs, Git, Command line, Firebase, MySQL, Heroku, Responsive Design and much more. The challenges that are presented while learning to code can be daunting. However, overcoming the obstacles I have encountered has been more rewarding than I could have imagined.</p>
 
                     <p class="no-bottom-margin">Thank you for taking the time view my portfolio. Please feel free to contact me or connect with me through any of the resources available on this site.</p>
+
                 </div>
               </div>
               <!-- <div class="container-cover"></div> -->
@@ -118,17 +119,19 @@
               </div>
               <div class="panel-body">
                 <div class="width-100 overline">
-                  <a href="#">
-                    <img class="api-button" src="assets/images/spotify.png" alt="Spotify Button" title="Spotify API" />
-                  </a>
+                  <div id="api-listen" class="api-listener">
+                    <a href="#">
+                      <img class="api-button" src="assets/images/spotify.png" data-name="spotify" alt="Spotify Button" title="Spotify API" />
+                    </a>
 
-                  <a href="#">
-                    <img class="api-button" src="assets/images/nytimes.jpg" alt="New York Times Button" title="New York Times API" />
-                  </a>
+                    <a href="#">
+                      <img class="api-button" src="assets/images/nytimes.jpg" data-name="nyt" alt="New York Times Button" title="New York Times API" />
+                    </a>
 
-                  <a href="#">
-                    <img class="api-button margin-bottom" src="assets/images/omdb.jpg" alt="OMDb Button" title="OMDb API" />
-                  </a>
+                    <a href="#">
+                      <img class="api-button margin-bottom" src="assets/images/omdb.jpg" data-name="omdb" alt="OMDb Button" title="OMDb API" />
+                    </a>
+                  </div>
                 </div>
               </div>
               <!-- <div class="container-cover"></div> -->
@@ -215,5 +218,6 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/api.js"></script>
   </body>
 </html>

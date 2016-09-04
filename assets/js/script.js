@@ -94,6 +94,7 @@ $(document).on("ready", function(){
     $('.bio-pic2').addClass('bio-pic-back');
 
   });
+  
 
   $('.image-wrapper').on('mouseenter', function(){
     

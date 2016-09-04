@@ -1,3 +1,4 @@
+// Object to populate Api Side Menu after click on About Page
 var spotify = {
     title: "Spotify Music",
     image: "assets/images/spotify.png",
@@ -20,83 +21,92 @@ omdb = {
     searchClass: "omdb-search"
 };
 
+// Wrapping jQuery in Doc Ready function
 $(document).on('ready', function(){
 
+    // Adds song preview to Spotify audio player
     function spotifyPlayer(track){
 
+        // Prevents duplicate players after multiple searches
         $('.player').remove();
 
         var playDiv = $('<div>'); //creates a new div element
-        //playDiv.attr('id', 'player'); //added id attribute
-        playDiv.addClass('player');
+        playDiv.addClass('player'); //adds player class to playDiv
 
-        // Builds a Spotify player playing the top song associated with the artist. (NOTE YOU NEED TO BE LOGGED INTO SPOTIFY)
+        // Builds a Spotify player playing the parameter song. (NOTE YOU NEED TO BE LOGGED INTO SPOTIFY)
         var player = '<iframe class="spot-player" src="https://embed.spotify.com/?uri=spotify:track:' + track + '" frameborder="0" allowtransparency="true"></iframe>';
 
+        // Append player to end of playDiv
         playDiv.append(player);
 
+        // Prepends playDiv to main-api-panel (created dynamically during search submit)
         $(".main-api-panel").prepend(playDiv);
 
     }
 
+    // Query spotify and build results divs
     function getArtistTrack(artist){
 
         // Run an initial search to identify the artist unique Spotify ID
         var queryURL = "https://api.spotify.com/v1/search?q=" + artist + "&type=artist";
         $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 
-            // Prints the entire object to console
+            // Logs the entire object to console
             console.log(response);
 
-            // Prints the Artist ID from the Spotify Object to console.
+            // Store the Artist ID from the Spotify Object
             var artistID = response.artists.items[0].id;
 
-            // Then we build a SECOND URL to query another Spotify endpoint (this one for the tracks)
+            // Build a SECOND URL to query another Spotify endpoint (this one for the tracks)
             var queryURLTracks = "https://api.spotify.com/v1/artists/" + artistID +"/top-tracks?country=US";
 
             // We then run a second AJAX call to get the tracks associated with that Spotify ID
             $.ajax({url: queryURLTracks, method: 'GET'}).done(function(trackResponse) {
 
-                // Gets the tracks
+                // Log the tracks to the console
                 console.log(trackResponse);
 
+                // Remove main-api-panel if it exists to clear the area for fresh results
                 $('.main-api-panel').remove();
 
-                var tracksContainer = $('<div>');
-                //tracksContainer.attr('id', 'main-api-panel');
-                tracksContainer.addClass('col-md-12 main-api-panel');
+                var tracksContainer = $('<div>'); //creates a new div element
+                tracksContainer.addClass('col-md-12 main-api-panel'); //adds classes to tracksContainer
 
+                // Store response in variable
                 var results = trackResponse.tracks;
 
+                // Loop through the response
                 for(var i = 0; i < results.length; i++){
 
-                    var trackWrap = $('<div>');
-                    trackWrap.addClass('col-md-4 track-container');
+                    var trackWrap = $('<div>'); //creates a new div element
+                    trackWrap.addClass('col-md-4 track-container'); //adds classes to trackWrap
 
-                    var trackImg = $('<img>');
-                    trackImg.attr('src', results[i].album.images[1].url);
-                    trackImg.data('id', results[i].id);
-                    trackImg.addClass('track-img');
+                    var trackImg = $('<img>'); //creates a new img element
+                    trackImg.attr('src', results[i].album.images[1].url); //add img src from response
+                    trackImg.data('id', results[i].id); //add data-id from results track id
+                    trackImg.addClass('track-img'); //add track-img class to img element
 
-                    var trackTitle = $('<p>');
-                    trackTitle.text(results[i].album.name);
+                    var trackTitle = $('<p>'); //creates a new p element
+                    trackTitle.text(results[i].album.name); //creates text node with album name
 
-                    trackWrap.append(trackImg);
-                    trackWrap.append(trackTitle);
+                    trackWrap.append(trackImg); //append trackImg to trackWrap
+                    trackWrap.append(trackTitle); //append trackTitle to trackWrap
 
-                    tracksContainer.append(trackWrap);
+                    tracksContainer.append(trackWrap); //append trackWrap to tracksContainer
 
                 }
 
+                // Hide about Adam content
                 $("#main-hidable").hide();
 
-                // Appends the new player into the HTML
+                // Appends the new dynamic content to main-panel div
                 $("#main-panel").append(tracksContainer);
 
+                // Call spotifyPlayer to add a new track to the audio player
                 spotifyPlayer(trackResponse.tracks[0].id);
             })
         });     
-    }
+    } // End of getArtistTrack function
 
     // Send a new track to the Spotify player when image is clicked
     $(document).on('click', '.track-img', function(){
@@ -104,6 +114,7 @@ $(document).on('ready', function(){
         // Track ID is stored in the image's data-id
         var trackSend = $(this).data('id'); 
 
+        // Call spotifyPlayer to add a new track to the audio player
         spotifyPlayer(trackSend);
 
     });
@@ -121,6 +132,7 @@ $(document).on('ready', function(){
         return false;
     });
 
+    // API selection
     $('.api-button').on('click', function(){
     
         var name = $(this).data('name');
@@ -162,8 +174,9 @@ $(document).on('ready', function(){
 
         $('#api-listen').prepend(sideDiv);//prepends dynamic element to listen div
 
-    });
+    }); // End of api selection
 
+    // Restores content to the way it was before api searches and selection
     $(document).on('click', '.api-restore', function(){
 
         $('#api-search').hide();

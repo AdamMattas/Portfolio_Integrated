@@ -36,6 +36,22 @@ $(document).on('ready', function(){
 
     }
 
+    function spotifyPlayer(track){
+
+        var playDiv = $('<div>'); //creates a new div element
+        playDiv.attr('id', 'player'); //added id attribute
+
+        // Builds a Spotify player playing the top song associated with the artist. (NOTE YOU NEED TO BE LOGGED INTO SPOTIFY)
+        var player = '<iframe class="spot-player" src="https://embed.spotify.com/?uri=spotify:track:' + track + '" frameborder="0" allowtransparency="true"></iframe>';
+
+        $("#player").empty();
+
+        playDiv.append(player);
+
+        $("#main-panel").prepend(playDiv);
+
+    }
+
     function getArtistTrack(artist){
 
         // Run an initial search to identify the artist unique Spotify ID
@@ -59,16 +75,48 @@ $(document).on('ready', function(){
 
                 buildArtistArea(trackResponse);
 
-                // Builds a Spotify player playing the top song associated with the artist. (NOTE YOU NEED TO BE LOGGED INTO SPOTIFY)
-                var player = '<iframe class="spot-player" src="https://embed.spotify.com/?uri=spotify:track:' + trackResponse.tracks[0].id + '" frameborder="0" allowtransparency="true"></iframe>';
+                var tracksContainer = $('<div>');
+                tracksContainer.addClass('col-md-12');
+
+                var results = trackResponse.tracks;
+
+                for(var i = 0; i < results.length; i++){
+
+                    var trackWrap = $('<div>');
+                    trackWrap.addClass('col-md-4 track-container');
+
+                    var trackImg = $('<img>');
+                    trackImg.attr('src', results[i].album.images[1].url);
+                    trackImg.data('id', results[i].id);
+                    trackImg.addClass('track-img');
+
+                    var trackTitle = $('<p>');
+                    trackTitle.text(results[i].album.name);
+
+                    trackWrap.append(trackImg);
+                    trackWrap.append(trackTitle);
+
+                    tracksContainer.append(trackWrap);
+
+                }
 
                 $("#main-panel").empty();
 
+                spotifyPlayer(trackResponse.tracks[0].id);
+
                 // Appends the new player into the HTML
-                $("#main-panel").prepend(player)
+                $("#main-panel").append(tracksContainer)
             })
         });     
     }
+
+    $(document).on('click', '.track-img', function(){
+
+        var trackSend = $(this).data('id'); 
+
+        spotifyPlayer(trackSend);
+
+    });
 
     // On Button Click for Artist Selection
     $(document).on('click', '#spotify-search', function(){

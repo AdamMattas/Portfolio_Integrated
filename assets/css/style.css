@@ -314,7 +314,20 @@ a:hover{
 
 .spot-player{
 	margin-top: 15px;
+	margin-bottom: 0px;
 	width: 100%;
+	max-height: 95px;
+}
+
+.track-container{
+	margin-top: 15px;
+	min-height: 302px;
+}
+
+.track-img{
+	width: 100%;
+	border: 1px solid #000000;
+	cursor: pointer;
 }
 
 footer{

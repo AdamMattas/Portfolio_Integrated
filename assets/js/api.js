@@ -22,33 +22,20 @@ omdb = {
 
 $(document).on('ready', function(){
 
-    function buildArtistArea(trackInfo){
-
-        var results = trackInfo.tracks;
-
-        for(var i=0; i < results.length; i++){
-
-            console.log('ID: ', results[i].album.id);
-            console.log('Image: ', results[i].album.images[1].url);
-            console.log('Name: ', results[i].album.name);
-
-        }
-
-    }
-
     function spotifyPlayer(track){
 
+        $('.player').remove();
+
         var playDiv = $('<div>'); //creates a new div element
-        playDiv.attr('id', 'player'); //added id attribute
+        //playDiv.attr('id', 'player'); //added id attribute
+        playDiv.addClass('player');
 
         // Builds a Spotify player playing the top song associated with the artist. (NOTE YOU NEED TO BE LOGGED INTO SPOTIFY)
         var player = '<iframe class="spot-player" src="https://embed.spotify.com/?uri=spotify:track:' + track + '" frameborder="0" allowtransparency="true"></iframe>';
 
-        $("#player").empty();
-
         playDiv.append(player);
 
-        $("#main-api-panel").prepend(playDiv);
+        $(".main-api-panel").prepend(playDiv);
 
     }
 
@@ -73,11 +60,11 @@ $(document).on('ready', function(){
                 // Gets the tracks
                 console.log(trackResponse);
 
-                buildArtistArea(trackResponse);
+                $('.main-api-panel').remove();
 
                 var tracksContainer = $('<div>');
-                tracksContainer.attr('id', 'main-api-panel');
-                tracksContainer.addClass('col-md-12');
+                //tracksContainer.attr('id', 'main-api-panel');
+                tracksContainer.addClass('col-md-12 main-api-panel');
 
                 var results = trackResponse.tracks;
 
@@ -181,7 +168,7 @@ $(document).on('ready', function(){
 
         $('#api-search').hide();
         $('#api-hidable').show();
-        $('#main-api-panel').hide();
+        $('.main-api-panel').hide();
         $("#main-hidable").show();
 
     });

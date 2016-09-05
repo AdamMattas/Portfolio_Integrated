@@ -303,6 +303,13 @@ $(document).on('ready', function(){
 
     // API selection
     $('.api-button').on('click', function(){
+
+        var width = $(document).width() - $('#squares-bottom-1').width();
+
+        $('#squares-top-1').animate({ 'right': '0' }, 1500);
+        $('#squares-bottom-1').animate({ 'left': width + 'px' }, 1500, function(){
+            $('#squares-bottom-1').removeClass('squares-bottom').addClass('squares-bottom-animated').removeAttr("style")    
+        });
     
         var name = $(this).data('name');
         var apiName = eval(name);
@@ -350,6 +357,15 @@ $(document).on('ready', function(){
 
     // Restores content to the way it was before api searches and selection
     $(document).on('click', '.api-restore', function(){
+
+        var width = $(document).width() - $('#squares-bottom-1').width();
+
+        $('#squares-top-1').animate({ 'right': width + 'px' }, 1500, function(){
+            $('#squares-top-1').removeAttr("style")    
+        });
+        $('#squares-bottom-1').animate({ 'right': width + 'px' }, 1500, function(){
+            $('#squares-bottom-1').removeClass('squares-bottom-animated').addClass('squares-bottom').removeAttr("style")    
+        });
 
         $('#api-search').hide();
         $('#api-hidable').show();

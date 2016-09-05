@@ -77,6 +77,17 @@ a:hover{
 	background-image: url("../images/squares2.png");
 	width: 143px;
 	height: 53px;
+	z-index: 99;
+}
+
+.squares-bottom-animated{
+	position: absolute;
+	top: 1px;
+	right: 0;
+	background-image: url("../images/squares2.png");
+	width: 143px;
+	height: 53px;
+	z-index: 99;
 }
 
 .adam-brand-sm{
@@ -453,4 +464,9 @@ footer{
 	margin-top: 8px;
 	background-color: #222222;
 	border-top: 8px solid #055c98;
+}
+
+.foot-text{
+	position: relative;
+	z-index: 100;
 }

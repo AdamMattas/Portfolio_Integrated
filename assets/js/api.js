@@ -24,6 +24,9 @@ omdb = {
 // Wrapping jQuery in Doc Ready function
 $(document).on('ready', function(){
 
+// =========================================
+// BEGIN SPOTIFY API CODE
+
     // Adds song preview to Spotify audio player
     function spotifyPlayer(track){
 
@@ -70,7 +73,7 @@ $(document).on('ready', function(){
                 $('.main-api-panel').remove();
 
                 var tracksContainer = $('<div>'); //creates a new div element
-                tracksContainer.addClass('col-md-12 main-api-panel'); //adds classes to tracksContainer
+                tracksContainer.addClass('main-api-panel'); //adds classes to tracksContainer
 
                 // Store response in variable
                 var results = trackResponse.tracks;
@@ -128,9 +131,175 @@ $(document).on('ready', function(){
         // Run the Artist Player Function (Passing in the Artist as an Argument)
         getArtistTrack(artist);
 
+        // Empty search area after submit
+        $('#spotify-input').val('');
+
         // Prevents moving to the next page
         return false;
     });
+
+// END SPOTIFY API CODE
+// =========================================
+// BEGIN THE NEW YORK TIMES API CODE
+
+    // =========================================
+    var authKey = "9d4a8986921972b65754ea0809d47c84:12:74623931";
+
+    // Search Parameters
+    var queryTerm   = "";
+    var numResults  = 10;
+    var startYear   = 0;
+    var endYear     = 0;
+
+    // URL Base
+    var queryURLBase = "http://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey; 
+
+    // Variable to Track number of articles
+    var articleCounter = 0;
+
+    // FUNCTIONS
+    // =========================================
+
+    function runQuery(numArticles, queryURL){
+
+        // AJAX Function
+        $.ajax({url: queryURL, method: "GET"})
+            .done(function(NYTData) {
+
+                // Logging to Console
+                console.log("------------------");
+                console.log(queryURL);
+                console.log("------------------");
+                console.log(numArticles);
+                console.log(NYTData);
+
+                // Clear the wells from the previous run
+                $('.main-api-panel').empty();
+
+                var articleContainer = $('<div>'); //creates a new div element
+                articleContainer.addClass('main-api-panel'); //adds classes to tracksContainer
+
+                for (var i=0; i<numArticles; i++){
+
+                    // Start Dumping to HTML Here
+                    var articleWrap = $('<div>');
+                    articleWrap.addClass("article-wrap");
+
+                    var wellSection = $('<div>');
+                    wellSection.addClass("article-well");
+                    wellSection.attr('id', 'articleWell-' + i);
+
+                    if(typeof NYTData.response.docs[i].multimedia[1] != "undefined") {
+                        var wellBackground = $('<img>');
+                        wellBackground.addClass('article-img');
+                        wellBackground.attr('src', 'https://static01.nyt.com/' + NYTData.response.docs[i].multimedia[1].url);
+                    }else{
+                        var wellBackground = $('<img>');
+                        wellBackground.addClass('article-img');
+                        wellBackground.attr('src', 'assets/images/nytimes_lrg.jpg');    
+                    }
+
+                    // Check if things exist 
+                    if(NYTData.response.docs[i].headline != "null") {
+                        console.log(NYTData.response.docs[i].headline.main);
+                        var articleTitle = $('<h3>');
+                        articleTitle.addClass('relative-title');
+                        articleTitle.text(NYTData.response.docs[i].headline.main);
+                        //$(wellSection).append("<h3 class='relative-title'>" + NYTData.response.docs[i].headline.main +  "</h3>");
+                    }
+
+                    // Check if the byline 
+                    if(NYTData.response.docs[i].byline && NYTData.response.docs[i].byline.hasOwnProperty("original")){
+                        console.log(NYTData.response.docs[i].byline.original);
+                        var articleByline = $('<h5>');
+                        articleByline.addClass('relative');
+                        articleByline.text(NYTData.response.docs[i].byline.original);
+                        //$(wellSection).append("<h5 class='relative'>" + NYTData.response.docs[i].byline.original + "</h5>");
+                    }
+
+                    // Attach the content to the appropriate well
+                    var sectionName = $('<h5>');
+                    sectionName.addClass('relative');
+                    sectionName.text(NYTData.response.docs[i].section_name);
+                    //$(wellSection).append("<h5 class='relative'>" + NYTData.response.docs[i].section_name + "</h5>");
+                    var articleDate = $('<h5>');
+                    articleDate.addClass('relative');
+                    articleDate.text(NYTData.response.docs[i].pub_date);
+                    //$(wellSection).append("<h5 class='relative'>" + NYTData.response.docs[i].pub_date + "</h5>");
+
+                    var articleLink = $('<a>');
+                    articleLink.addClass('above');
+                    articleLink.attr('href', NYTData.response.docs[i].web_url);
+                    articleLink.attr('target', '_blank');
+                    articleLink.text('VIEW');
+
+                    // Hide about Adam content
+                    $("#main-hidable").hide();
+
+                    $(wellSection).append(wellBackground);
+                    $(wellSection).append(articleTitle);
+                    $(wellSection).append(articleByline);
+                    $(wellSection).append(sectionName);
+                    $(wellSection).append(articleDate);
+
+                    $(articleWrap).append(articleLink);
+                    $(articleWrap).append(wellSection);
+
+                    $(articleContainer).append(articleWrap);
+
+                    // Appends the new dynamic content to main-panel div
+                    $("#main-panel").append(articleContainer);
+
+                    console.log(NYTData.response.docs[i].section_name);
+                    console.log(NYTData.response.docs[i].pub_date);
+                    console.log(NYTData.response.docs[i].web_url);
+                }
+
+
+            })
+
+    }
+
+    // MAIN PROCESSES
+    // =========================================
+
+    $(document).on('click', '#nyt-search', function() {
+
+        // Get Search Term
+        queryTerm = $('#nyt-input').val().trim();
+
+        // Add in the Search Term
+        var newURL = queryURLBase + "&q=" + queryTerm;
+
+        if (parseInt(startYear)) {
+
+            // Add the necessary fields
+            startYear = "20120101";
+
+            // Add the date information to the URL
+            newURL = newURL + "&begin_date=" + startYear;   
+        }
+
+        if(parseInt(endYear)){
+
+            // Add the necessary fields
+            endYear = "20160101";
+            
+            // Add the date information to the URL
+            newURL = newURL + "&end_date=" + endYear;   
+        } 
+
+        // Send the AJAX Call the newly assembled URL 
+        runQuery(numResults, newURL);
+
+        $('#nyt-input').val('');
+
+        return false;
+
+    })
+
+// END THE NEW YORK TIMES API CODE
+// =========================================
 
     // API selection
     $('.api-button').on('click', function(){
@@ -149,10 +318,12 @@ $(document).on('ready', function(){
         sideImage.attr('src', apiName.image); //added src attribute from object
         sideImage.addClass('api-button'); //added class to image
 
-        var sideText = $('<input>'); //creates a new p element
-        sideText.attr('id', apiName.id);
-        sideText.attr('type', 'text');
-        sideText.addClass('form-control api-input');
+        var sideForm = $('<form>'); //creates a new form element
+
+        var sideText = $('<input>'); //creates a new input element
+        sideText.attr('id', apiName.id); //adds an id to input
+        sideText.attr('type', 'text'); //adds text type to input
+        sideText.addClass('form-control api-input'); //adds classes to input element
         sideText.attr('placeholder', apiName.placeholder); //adds text from object
 
         var sideLink = $('<button>'); //creates a new p element
@@ -164,11 +335,12 @@ $(document).on('ready', function(){
         sideClose.text('Go Back'); //adds text from object
         sideClose.addClass('btn btn-danger api-restore'); //added class to image
 
-        (sideDiv).append(sideTitle);//appends dynamic element to sideDiv
-        (sideDiv).append(sideImage);//appends dynamic element to sideDiv
-        (sideDiv).append(sideText);//appends dynamic element to sideDiv
-        (sideDiv).append(sideLink);//appends dynamic element to sideDiv
-        (sideDiv).append(sideClose);//appends dynamic element to sideDiv
+        (sideDiv).append(sideTitle); //appends dynamic element to sideDiv
+        (sideDiv).append(sideImage); //appends dynamic element to sideDiv
+        (sideForm).append(sideText); //appends dynamic element to sideForm
+        (sideForm).append(sideLink); //appends dynamic element to sideForm
+        (sideDiv).append(sideForm); //appends dynamic element to sideDiv
+        (sideDiv).append(sideClose); //appends dynamic element to sideDiv
 
         $('#api-hidable').hide();
 

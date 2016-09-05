@@ -349,6 +349,84 @@ a:hover{
 	cursor: pointer;
 }
 
+/*begin new york times api*/
+
+.article-wrap{
+	position: relative;
+}
+
+.article-well{
+	position: relative;
+	width: 100%;
+	min-height: 157px;
+	border: 1px solid #222222;
+	border-left: 45px solid #222222;
+	padding: 15px;
+	margin-top: 15px;
+	overflow: hidden;
+	z-index: 99;
+}
+
+.article-img{
+	width: 100%;
+	position: absolute;
+	top: -75px;
+	left: 0;
+	opacity: 0.5;
+	z-index: 99;
+}
+
+.relative-title{
+	position: relative;
+	margin-top: 7px;
+	color: #000000;
+	font-weight: bold;
+	text-shadow: 0.5px 0.5px  #ffffff;
+	z-index: 100;
+}
+
+.relative{
+	position: relative;
+	color: #000000;
+	font-weight: bold;
+	/*text-shadow: 0.5px 0.5px  #ffffff;*/
+	z-index: 100;
+}
+
+.above{
+	position: absolute;
+	left: -6px;
+	/*top: 66px;*/
+	top: 42.5%;
+	color: #ffffff;
+	font-weight: bold;
+	letter-spacing: 2px;
+	font-size: 20px;
+	z-index: 100;
+	-webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.above:hover{
+	text-decoration: none;
+	color: #055c98;
+}
+
+.above:focus{
+	text-decoration: none;
+	color: #055c98;	
+}
+
+.above:active{
+	text-decoration: none;
+	color: #055c98;	
+}
+
+/*end new york times api*/
+
 footer{
 	margin: 0px;
 }

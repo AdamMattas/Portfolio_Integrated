@@ -214,7 +214,6 @@ $(document).on('ready', function(){
                         var articleTitle = $('<h3>');
                         articleTitle.addClass('relative-title');
                         articleTitle.text(NYTData.response.docs[i].headline.main);
-                        //$(wellSection).append("<h3 class='relative-title'>" + NYTData.response.docs[i].headline.main +  "</h3>");
                     }
 
                     // Check if the byline 
@@ -223,18 +222,16 @@ $(document).on('ready', function(){
                         var articleByline = $('<h5>');
                         articleByline.addClass('relative');
                         articleByline.text(NYTData.response.docs[i].byline.original);
-                        //$(wellSection).append("<h5 class='relative'>" + NYTData.response.docs[i].byline.original + "</h5>");
                     }
 
                     // Attach the content to the appropriate well
                     var sectionName = $('<h5>');
                     sectionName.addClass('relative');
                     sectionName.text(NYTData.response.docs[i].section_name);
-                    //$(wellSection).append("<h5 class='relative'>" + NYTData.response.docs[i].section_name + "</h5>");
+
                     var articleDate = $('<h5>');
                     articleDate.addClass('relative');
                     articleDate.text(NYTData.response.docs[i].pub_date);
-                    //$(wellSection).append("<h5 class='relative'>" + NYTData.response.docs[i].pub_date + "</h5>");
 
                     var articleLink = $('<a>');
                     articleLink.addClass('above');
@@ -308,6 +305,102 @@ $(document).on('ready', function(){
     })
 
 // END THE NEW YORK TIMES API CODE
+// =========================================
+// BEGIN OMDB API CODE
+
+    $(document).on('click', '#omdb-search', function() {
+
+        var movie = $('#omdb-input').val().trim();
+        var queryURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=full&r=json";
+        
+        // Creates AJAX call for the specific movie being 
+        $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+
+            console.log(response);
+
+            // Clear the wells from the previous run
+            $('.main-api-panel').empty();
+
+            if(response.Response != 'False'){
+
+                var omdbContainer = $('<div>'); //creates a new div element
+                omdbContainer.addClass('main-api-panel'); //adds a class to tracksContainer
+
+                var omdbImage = $('<img>'); //creates a new img element
+                omdbImage.attr('src', response.Poster); //adds img src to img element
+                omdbImage.addClass('omdb-img'); //adds a class to omdbImage
+
+                var omdbTitle = $('<h2>'); //creates a new h3 element
+                omdbTitle.addClass('omdb-title'); //adds a class to omdbTitle
+                omdbTitle.text(response.Title); //adds textNode to omdbTitlte
+
+                var omdbYear = $('<h4>'); //creates a new h4 element
+                omdbYear.text('Released: ' + response.Year); //adds textNode to omdbYear
+
+                var omdbRated = $('<h4>'); //creates a new h4 element
+                omdbRated.text('Rated: ' + response.Rated); //adds textNode to omdbRated
+
+                var omdbGenre = $('<h4>'); //creates a new h4 element
+                omdbGenre.text('Genre: ' + response.Genre); //adds textNode to omdbGenre
+
+                var omdbDirector = $('<h4>'); //creates a new h4 element
+                omdbDirector.text('Directed by: ' + response.Director); //adds textNode to omdbDirector
+
+                var omdbWriter = $('<h4>'); //creates a new h4 element
+                omdbWriter.text('Written by: ' + response.Writer); //adds textNode to omdbWriter
+
+                var omdbActors = $('<h4>'); //creates a new h4 element
+                omdbActors.text('Starring: ' + response.Actors); //adds textNode to omdbActors
+
+                var omdbAwards = $('<h4>'); //creates a new h4 element
+                omdbAwards.text('Awards: ' + response.Awards); //adds textNode to omdbAwards
+
+                var omdbCountry = $('<h4>'); //creates a new h4 element
+                omdbCountry.text('Country: ' + response.Country); //adds textNode to omdbCountry
+
+                var omdbLanguage = $('<h4>'); //creates a new h4 element
+                omdbLanguage.text('Language: ' + response.Language); //adds textNode to omdbLanguage
+
+                var omdbRuntime = $('<h4>'); //creates a new h4 element
+                omdbRuntime.text('Runtime: ' + response.Runtime); //adds textNode to omdbRuntime
+
+                var omdbImdbRate = $('<h4>'); //creates a new h4 element
+                omdbImdbRate.text('IMDB Rating: ' + response.imdbRating); //adds textNode to omdbImdbRate
+
+                var omdbPlot = $('<p>'); //creates a new p element
+                omdbPlot.text(response.Plot); //adds textNode to omdbPlot
+
+                $(omdbContainer).append(omdbImage);
+                $(omdbContainer).append(omdbTitle);
+                $(omdbContainer).append(omdbYear);
+                $(omdbContainer).append(omdbRated);
+                $(omdbContainer).append(omdbGenre);
+                $(omdbContainer).append(omdbDirector);
+                $(omdbContainer).append(omdbWriter);
+                $(omdbContainer).append(omdbActors);
+                $(omdbContainer).append(omdbAwards);
+                $(omdbContainer).append(omdbCountry);
+                $(omdbContainer).append(omdbLanguage);
+                $(omdbContainer).append(omdbRuntime);
+                $(omdbContainer).append(omdbImdbRate);
+                $(omdbContainer).append(omdbPlot);
+
+                // Appends the new dynamic content to main-panel div
+                $("#main-panel").append(omdbContainer);
+
+                // Hide about Adam content
+                $("#main-hidable").hide();
+
+            }
+
+            $('#omdb-input').val('');
+
+            return false;
+        }); 
+
+    });    
+
+// END OMDB API CODE
 // =========================================
 
     // API selection

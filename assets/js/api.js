@@ -318,18 +318,24 @@ $(document).on('ready', function(){
 
             console.log(response);
 
-            // Clear the wells from the previous run
-            $('.main-api-panel').empty();
-
             if(response.Response != 'False'){
+
+                // Clear the wells from the previous run
+                $('.main-api-panel').empty();
 
                 var omdbContainer = $('<div>'); //creates a new div element
                 omdbContainer.addClass('main-api-panel'); //adds a class to tracksContainer
 
-                var omdbImage = $('<img>'); //creates a new img element
-                omdbImage.attr('src', response.Poster); //adds img src to img element
-                omdbImage.addClass('omdb-img'); //adds a class to omdbImage
-
+                if(response.Poster != 'N/A'){
+                    var omdbImage = $('<img>'); //creates a new img element
+                    omdbImage.attr('src', response.Poster); //adds img src to img element
+                    omdbImage.addClass('omdb-img'); //adds a class to omdbImage   
+                }else{
+                    var omdbImage = $('<img>'); //creates a new img element
+                    omdbImage.attr('src', './assets/images/generic.jpg'); //adds img src to img element
+                    omdbImage.addClass('omdb-img'); //adds a class to omdbImage       
+                }
+                
                 var omdbTitle = $('<h2>'); //creates a new h3 element
                 omdbTitle.addClass('omdb-title'); //adds a class to omdbTitle
                 omdbTitle.text(response.Title); //adds textNode to omdbTitlte
@@ -446,7 +452,7 @@ $(document).on('ready', function(){
         sideLink.addClass('btn btn-primary api-search-button'); //added class to image
 
         var sideClose = $('<button>'); //creates a new p element
-        sideClose.text('Go Back'); //adds text from object
+        sideClose.text('Go Back to APIs'); //adds text from object
         sideClose.attr('data-id', apiName.large); //adds data-id from object
         sideClose.attr('data-in', apiName.largeIn); //adds data-in from object
         sideClose.attr('data-out', apiName.largeOut); //adds data-out from object

@@ -4,21 +4,30 @@ var spotify = {
     image: "assets/images/spotify.png",
     placeholder: "Search Artist Name",
     id: "spotify-input",
-    searchClass: "spotify-search"
+    searchClass: "spotify-search",
+    large: "spotify-lrg",
+    largeIn: "spotify-lrg-in",
+    largeOut: "spotify-lrg-out"
 },
 nyt = {
     title: "The New York Times",
     image: "assets/images/nytimes.jpg",
     placeholder: "Search Articles",
     id: "nyt-input",
-    searchClass: "nyt-search"
+    searchClass: "nyt-search",
+    large: "nytimes-lrg",
+    largeIn: "nytimes-lrg-in",
+    largeOut: "nytimes-lrg-out"
 },
 omdb = {
     title: "OMDb Movies",
     image: "assets/images/omdb.jpg",
     placeholder: "Search Movie Title",
     id: "omdb-input",
-    searchClass: "omdb-search"
+    searchClass: "omdb-search",
+    large: "spotify-lrg",
+    largeIn: "spotify-lrg-in",
+    largeOut: "spotify-lrg-out"
 };
 
 // Wrapping jQuery in Doc Ready function
@@ -304,15 +313,20 @@ $(document).on('ready', function(){
     // API selection
     $('.api-button').on('click', function(){
 
-        var width = $(document).width() - $('#squares-bottom-1').width();
-
-        $('#squares-top-1').animate({ 'right': '0' }, 1500);
-        $('#squares-bottom-1').animate({ 'left': width + 'px' }, 1500, function(){
-            $('#squares-bottom-1').removeClass('squares-bottom').addClass('squares-bottom-animated').removeAttr("style")    
-        });
-    
         var name = $(this).data('name');
         var apiName = eval(name);
+
+        var lrgImg = apiName.large;
+        var lrgInImg = apiName.largeIn;
+        var lrgOutImg = apiName.largeOut;
+
+        var width = $(document).width() - $('#squares-bottom-1').width();
+
+        $('#squares-top-1').animate({ 'right': '0' }, 1200);
+        $('#squares-bottom-1').animate({ 'left': width + 'px' }, 1200, function(){
+            apiFadeIn(lrgImg, lrgInImg, lrgOutImg);
+            $('#squares-bottom-1').removeClass('squares-bottom').addClass('squares-bottom-animated').removeAttr("style");
+        });
 
         var sideDiv = $('<div>');
         sideDiv.attr('id', 'api-search');
@@ -340,6 +354,9 @@ $(document).on('ready', function(){
 
         var sideClose = $('<button>'); //creates a new p element
         sideClose.text('Go Back'); //adds text from object
+        sideClose.attr('data-id', apiName.large); //adds data-id from object
+        sideClose.attr('data-in', apiName.largeIn); //adds data-in from object
+        sideClose.attr('data-out', apiName.largeOut); //adds data-out from object
         sideClose.addClass('btn btn-danger api-restore'); //added class to image
 
         (sideDiv).append(sideTitle); //appends dynamic element to sideDiv
@@ -358,14 +375,21 @@ $(document).on('ready', function(){
     // Restores content to the way it was before api searches and selection
     $(document).on('click', '.api-restore', function(){
 
+        var lrgImg = $(this).attr('data-id');
+        var lrgInImg = $(this).attr('data-in');
+        var lrgOutImg = $(this).attr('data-out');
+
         var width = $(document).width() - $('#squares-bottom-1').width();
 
-        $('#squares-top-1').animate({ 'right': width + 'px' }, 1500, function(){
+        $('#squares-top-1').animate({ 'right': width + 'px' }, 1200, function(){
             $('#squares-top-1').removeAttr("style")    
         });
-        $('#squares-bottom-1').animate({ 'right': width + 'px' }, 1500, function(){
-            $('#squares-bottom-1').removeClass('squares-bottom-animated').addClass('squares-bottom').removeAttr("style")    
+
+        $('#squares-bottom-1').animate({ 'right': width + 'px' }, 1200, function(){
+            $('#squares-bottom-1').removeClass('squares-bottom-animated').addClass('squares-bottom').removeAttr("style");
         });
+
+        apiFadeOut(lrgImg, lrgInImg, lrgOutImg);
 
         $('#api-search').hide();
         $('#api-hidable').show();
@@ -373,5 +397,25 @@ $(document).on('ready', function(){
         $("#main-hidable").show();
 
     });
+
+    function apiFadeIn(lrgImg, lrgInImg, lrgOutImg){
+
+        $('#' + lrgImg).addClass(lrgInImg).removeClass(lrgImg).removeClass(lrgOutImg);
+
+    }
+
+    function apiFadeOut(lrgImg, lrgInImg, lrgOutImg){
+
+        $('#' + lrgImg).addClass(lrgOutImg).removeClass(lrgInImg), function(){
+            restoreFade(lrgImg);    
+        }   
+
+    }
+
+    function restoreFade(lrgImg){
+
+        $('#' + lrgImg).addClass(lrgImg).removeClass(lrgOutImg); 
+
+    }
 
 });

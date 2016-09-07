@@ -372,6 +372,44 @@ a:hover{
    opacity: 0;
 }
 
+.omdb-lrg{
+	position: absolute;
+	right: 0;
+	top: 19%;
+	background-image: url("../images/omdb_lrg.png");
+	width: 143px;
+	height: 601px;
+	opacity: 0;
+}
+
+.omdb-lrg-in{
+	position: absolute;
+	right: 0;
+	top: 19%;
+	background-image: url("../images/omdb_lrg.png");
+	width: 143px;
+	height: 601px;
+	-webkit-transition: opacity 3s ease-in-out;
+  -moz-transition: opacity 3s ease-in-out;
+  -ms-transition: opacity 3s ease-in-out;
+  -o-transition: opacity 3s ease-in-out;
+   opacity: 1;
+}
+
+.omdb-lrg-out{
+	position: absolute;
+	right: 0;
+	top: 19%;
+	background-image: url("../images/omdb_lrg.png");
+	width: 143px;
+	height: 601px;
+	-webkit-transition: opacity 3s ease-in-out;
+  -moz-transition: opacity 3s ease-in-out;
+  -ms-transition: opacity 3s ease-in-out;
+  -o-transition: opacity 3s ease-in-out;
+   opacity: 0;
+}
+
 .omdb-img{ 
 	width: auto; 
 	height: 508px; 

@@ -25,9 +25,9 @@ omdb = {
     placeholder: "Search Movie Title",
     id: "omdb-input",
     searchClass: "omdb-search",
-    large: "spotify-lrg",
-    largeIn: "spotify-lrg-in",
-    largeOut: "spotify-lrg-out"
+    large: "omdb-lrg",
+    largeIn: "omdb-lrg-in",
+    largeOut: "omdb-lrg-out"
 };
 
 // Wrapping jQuery in Doc Ready function
@@ -302,7 +302,7 @@ $(document).on('ready', function(){
 
         return false;
 
-    })
+    });
 
 // END THE NEW YORK TIMES API CODE
 // =========================================
@@ -400,10 +400,10 @@ $(document).on('ready', function(){
             }
 
             $('#omdb-input').val('');
-
-            return false;
+     
         }); 
 
+        return false;
     });    
 
 // END OMDB API CODE
